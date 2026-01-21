@@ -1,0 +1,456 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>AutoCAD 3D Tutorial - Pyramid & Cylinder Modeling</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+        
+        body {
+            background-color: #f8f9fa;
+            color: #333;
+            line-height: 1.6;
+            padding-bottom: 40px;
+        }
+        
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+        
+        header {
+            background: linear-gradient(135deg, #1a3c8b 0%, #2d5cc2 100%);
+            color: white;
+            padding: 30px 0;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+            margin-bottom: 30px;
+        }
+        
+        header h1 {
+            font-size: 2.5rem;
+            text-align: center;
+            margin-bottom: 10px;
+        }
+        
+        .subtitle {
+            text-align: center;
+            font-size: 1.1rem;
+            opacity: 0.9;
+            max-width: 800px;
+            margin: 0 auto;
+        }
+        
+        main {
+            background-color: white;
+            border-radius: 10px;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.05);
+            padding: 30px;
+            margin-bottom: 30px;
+        }
+        
+        .goal-section {
+            text-align: center;
+            margin-bottom: 40px;
+            padding-bottom: 30px;
+            border-bottom: 1px solid #eaeaea;
+        }
+        
+        .goal-section h2 {
+            color: #1a3c8b;
+            margin-bottom: 15px;
+            font-size: 1.8rem;
+        }
+        
+        .goal-image {
+            max-width: 100%;
+            border-radius: 8px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+            margin-top: 20px;
+            border: 1px solid #ddd;
+        }
+        
+        .steps-section h2 {
+            color: #1a3c8b;
+            margin-bottom: 25px;
+            font-size: 1.8rem;
+            padding-bottom: 10px;
+            border-bottom: 2px solid #eaeaea;
+        }
+        
+        .step-card {
+            display: flex;
+            flex-wrap: wrap;
+            margin-bottom: 40px;
+            padding: 25px;
+            background-color: #f8fafc;
+            border-radius: 8px;
+            border-left: 4px solid #2d5cc2;
+            transition: transform 0.3s, box-shadow 0.3s;
+        }
+        
+        .step-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 8px 16px rgba(0, 0, 0, 0.08);
+        }
+        
+        .step-info {
+            flex: 1;
+            min-width: 300px;
+            padding-right: 20px;
+        }
+        
+        .step-number {
+            display: inline-block;
+            background-color: #2d5cc2;
+            color: white;
+            width: 36px;
+            height: 36px;
+            border-radius: 50%;
+            text-align: center;
+            line-height: 36px;
+            font-weight: bold;
+            margin-bottom: 15px;
+        }
+        
+        .step-card h3 {
+            color: #1a3c8b;
+            margin-bottom: 15px;
+            font-size: 1.3rem;
+        }
+        
+        .step-card p {
+            margin-bottom: 15px;
+            color: #555;
+        }
+        
+        .dimensions {
+            background-color: #e8f0fe;
+            padding: 12px 15px;
+            border-radius: 6px;
+            margin-top: 10px;
+            border-left: 3px solid #2d5cc2;
+        }
+        
+        .dimensions h4 {
+            color: #1a3c8b;
+            margin-bottom: 8px;
+        }
+        
+        .dimensions ul {
+            padding-left: 20px;
+        }
+        
+        .dimensions li {
+            margin-bottom: 5px;
+        }
+        
+        .step-media {
+            flex: 1;
+            min-width: 300px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+        
+        .step-video {
+            width: 100%;
+            max-width: 500px;
+            border-radius: 8px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+            margin-top: 10px;
+        }
+        
+        .video-note {
+            font-size: 0.85rem;
+            color: #666;
+            margin-top: 8px;
+            text-align: center;
+        }
+        
+        .tools-section {
+            background-color: #f0f7ff;
+            border-radius: 8px;
+            padding: 25px;
+            margin-top: 30px;
+        }
+        
+        .tools-section h3 {
+            color: #1a3c8b;
+            margin-bottom: 20px;
+            font-size: 1.5rem;
+        }
+        
+        .tool-list {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 15px;
+        }
+        
+        .tool-item {
+            background-color: white;
+            padding: 15px;
+            border-radius: 6px;
+            flex: 1;
+            min-width: 200px;
+            box-shadow: 0 3px 6px rgba(0, 0, 0, 0.05);
+            display: flex;
+            align-items: center;
+        }
+        
+        .tool-icon {
+            background-color: #e8f0fe;
+            color: #2d5cc2;
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin-right: 15px;
+            font-size: 1.2rem;
+        }
+        
+        footer {
+            text-align: center;
+            margin-top: 40px;
+            color: #666;
+            font-size: 0.9rem;
+            padding-top: 20px;
+            border-top: 1px solid #eaeaea;
+        }
+        
+        @media (max-width: 768px) {
+            .step-card {
+                flex-direction: column;
+            }
+            
+            .step-info {
+                padding-right: 0;
+                margin-bottom: 20px;
+            }
+            
+            header h1 {
+                font-size: 2rem;
+            }
+            
+            .subtitle {
+                font-size: 1rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <div class="container">
+            <h1><i class="fas fa-cube"></i> AutoCAD 3D Modeling Tutorial</h1>
+            <p class="subtitle">Learn how to create a 3D model of a pyramid with cylinders using step-by-step instructions and video demonstrations.</p>
+        </div>
+    </header>
+    
+    <div class="container">
+        <main>
+            <section class="goal-section">
+                <h2><i class="fas fa-bullseye"></i> Tutorial Goal</h2>
+                <p>Our objective is to create this 3D model using AutoCAD:</p>
+                <div class="goal-image-container">
+                    <img src="/images/Screenshot 2026-01-21 170302.png" alt="AutoCAD 3D Model Goal" class="goal-image">
+                </div>
+            </section>
+            
+            <section class="steps-section">
+                <h2><i class="fas fa-list-ol"></i> Step-by-Step Instructions</h2>
+                
+                <div class="step-card">
+                    <div class="step-info">
+                        <div class="step-number">1</div>
+                        <h3>Create the Pyramid Base</h3>
+                        <p>Use the <strong>PYRAMID</strong> command to create a 4-sided pyramid with the following dimensions:</p>
+                        <div class="dimensions">
+                            <h4>Pyramid Specifications:</h4>
+                            <ul>
+                                <li><strong>Base:</strong> 4-sided (circumscribed)</li>
+                                <li><strong>Base Radius:</strong> 30 units</li>
+                                <li><strong>Top Radius:</strong> 15 units</li>
+                                <li><strong>Height:</strong> 25 units</li>
+                            </ul>
+                        </div>
+                        <p>Make sure to select the "Circumscribed" option when prompted for the base type.</p>
+                    </div>
+                    <div class="step-media">
+                        <video controls muted loop class="step-video">
+                            <source src="/videos/Screen Recording 2026-01-21 165250.mp4" type="video/mp4">
+                            Your browser does not support the video tag.
+                        </video>
+                        <p class="video-note">Video demonstration: Creating the pyramid</p>
+                    </div>
+                </div>
+                
+                <div class="step-card">
+                    <div class="step-info">
+                        <div class="step-number">2</div>
+                        <h3>Add the First Cylinder</h3>
+                        <p>Use the <strong>CYLINDER</strong> command with <strong>3D Object Snap</strong> to place a cylinder on top of the pyramid.</p>
+                        <div class="dimensions">
+                            <h4>Cylinder Specifications:</h4>
+                            <ul>
+                                <li><strong>Base Center:</strong> Center of pyramid's top side (use 3D Object Snap)</li>
+                                <li><strong>Radius:</strong> 10 units</li>
+                                <li><strong>Height:</strong> 50 units</li>
+                            </ul>
+                        </div>
+                        <p>Activate 3D Object Snap from the status bar to accurately select the center of the pyramid's top face.</p>
+                    </div>
+                    <div class="step-media">
+                        <video controls muted loop class="step-video">
+                            <source src="/videos/Screen Recording 2026-01-21 165359.mp4" type="video/mp4">
+                            Your browser does not support the video tag.
+                        </video>
+                        <p class="video-note">Video demonstration: Adding the first cylinder</p>
+                    </div>
+                </div>
+                
+                <div class="step-card">
+                    <div class="step-info">
+                        <div class="step-number">3</div>
+                        <h3>Add the Second Cylinder</h3>
+                        <p>Draw another cylinder on top of the first cylinder with the following dimensions:</p>
+                        <div class="dimensions">
+                            <h4>Cylinder Specifications:</h4>
+                            <ul>
+                                <li><strong>Base Center:</strong> Center of first cylinder's top face</li>
+                                <li><strong>Radius:</strong> 2.5 units</li>
+                                <li><strong>Height:</strong> 75 units</li>
+                            </ul>
+                        </div>
+                        <p>Use the center of the first cylinder's top face as the base point for the second cylinder.</p>
+                    </div>
+                    <div class="step-media">
+                        <video controls muted loop class="step-video">
+                            <source src="/videos/Screen Recording 2026-01-21 165551.mp4" type="video/mp4">
+                            Your browser does not support the video tag.
+                        </video>
+                        <p class="video-note">Video demonstration: Adding the second cylinder</p>
+                    </div>
+                </div>
+                
+                <div class="step-card">
+                    <div class="step-info">
+                        <div class="step-number">4</div>
+                        <h3>Create the Box Element</h3>
+                        <p>In an empty space, create a box with the following dimensions:</p>
+                        <div class="dimensions">
+                            <h4>Box Specifications:</h4>
+                            <ul>
+                                <li><strong>Length:</strong> 60 units</li>
+                                <li><strong>Width:</strong> 2.5 units</li>
+                                <li><strong>Height:</strong> 30 units</li>
+                            </ul>
+                        </div>
+                        <p>Use the <strong>BOX</strong> command and specify the dimensions when prompted. This box will be positioned later in the assembly.</p>
+                    </div>
+                    <div class="step-media">
+                        <video controls muted loop class="step-video">
+                            <source src="/videos/Screen Recording 2026-01-21 165658.mp4" type="video/mp4">
+                            Your browser does not support the video tag.
+                        </video>
+                        <p class="video-note">Video demonstration: Creating the box</p>
+                    </div>
+                </div>
+            </section>
+            
+            <section class="tools-section">
+                <h3><i class="fas fa-tools"></i> AutoCAD Tools Used in This Tutorial</h3>
+                <div class="tool-list">
+                    <div class="tool-item">
+                        <div class="tool-icon">
+                            <i class="fas fa-mountain"></i>
+                        </div>
+                        <div>
+                            <h4>PYRAMID Command</h4>
+                            <p>Creates a 3D solid pyramid</p>
+                        </div>
+                    </div>
+                    
+                    <div class="tool-item">
+                        <div class="tool-icon">
+                            <i class="fas fa-circle"></i>
+                        </div>
+                        <div>
+                            <h4>CYLINDER Command</h4>
+                            <p>Creates a 3D solid cylinder</p>
+                        </div>
+                    </div>
+                    
+                    <div class="tool-item">
+                        <div class="tool-icon">
+                            <i class="fas fa-cube"></i>
+                        </div>
+                        <div>
+                            <h4>BOX Command</h4>
+                            <p>Creates a 3D solid box</p>
+                        </div>
+                    </div>
+                    
+                    <div class="tool-item">
+                        <div class="tool-icon">
+                            <i class="fas fa-bullseye"></i>
+                        </div>
+                        <div>
+                            <h4>3D Object Snap</h4>
+                            <p>Snaps to 3D object points</p>
+                        </div>
+                    </div>
+                </div>
+            </section>
+        </main>
+        
+        <footer>
+            <p>AutoCAD 3D Modeling Tutorial &copy; 2023 | Designed for educational purposes</p>
+            <p>All measurements are in generic units. Adjust as needed for your specific project.</p>
+        </footer>
+    </div>
+
+    <script>
+        // Add interactivity to videos
+        document.addEventListener('DOMContentLoaded', function() {
+            // Play videos when they come into view
+            const videos = document.querySelectorAll('video');
+            
+            const observer = new IntersectionObserver((entries) => {
+                entries.forEach(entry => {
+                    if (entry.isIntersecting) {
+                        // Optional: Auto-play when video is in view
+                        // entry.target.play();
+                    }
+                });
+            }, { threshold: 0.5 });
+            
+            videos.forEach(video => {
+                observer.observe(video);
+            });
+            
+            // Add click to play/pause functionality on video containers
+            document.querySelectorAll('.step-media').forEach(container => {
+                container.addEventListener('click', function(e) {
+                    if (e.target.tagName !== 'VIDEO') {
+                        const video = this.querySelector('video');
+                        if (video.paused) {
+                            video.play();
+                        } else {
+                            video.pause();
+                        }
+                    }
+                });
+            });
+        });
+    </script>
+</body>
+</html>
